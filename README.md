@@ -1,32 +1,48 @@
-# EMSnewfunctions
+New class added and main.java updated
 
-Employee Management System
-This is my program for new functions. Dito, pwede kong i-store, i-edit, magdagdag ng bagong entry, o tanggalin ang mga kasalukuyang empleyado. Para magamit ang mga feature na ito, kailangan ko munang mag-login. New Class Added (EmployeeDataHandler.java, binago ko din yung main.java)
+EmployeeDataHandler.java
+This class is responsible for managing employee data, including handling login credentials and CRUD operations (Create, Read, Update, Delete) that directly update the CSV file storing employee information.
 
-Updates
-Importing Employees from CSV File
+Login Credentials
 
-When the program starts, it automatically imports employee data from employees.csv and displays it in the EmployeeForm.
-Logging Out
+The checkCredentials(String username, String password) method verifies user login credentials against stored data. It checks if the provided username and password match any entry in the system. If successful, the user gains access to the system features.
 
-Mayroon na akong logout feature. Kapag pumindot sa Profile sa taas, lumalabas ang menu kung saan pwede kong piliin ang "Logout".
-Profile Menu
+CRUD Operations
 
-Simplified ang pag-log out. Kapag pumindot sa Profile, may menu na lilitaw kung saan pwede ko agad na piliin ang "Logout".
-Enhanced Text Field Functionality
+Update Employee Information
+Update: The updateEmployee(Employee employee) method modifies existing employee details based on the provided Employee object. It locates the employee by ID, updates their information, and then saves the changes to the CSV file.
+Delete Employee
+Delete: The deleteEmployee(int employeeId) method removes an employee from the system based on their unique ID. It finds the employee by ID, deletes their record, and then updates the CSV file to reflect the change.
+Add New Employee
+Add: The addEmployee(Employee employee) method inserts a new employee into the system. It takes an Employee object as input, assigns a unique ID (if necessary), adds the employee to the data collection, and then updates the CSV file with the new employee's information.
+CSV File Management
 
-Pina-improve ko ang paggamit ng mga text field para sa username at password. May placeholder text na lumilitaw kapag walang laman ang field, kaya mas madali nang maintindihan kung ano ang dapat ilagay.
-How to Use
-Opening the Program
+The changes made through these methods are immediately reflected in the employees.csv file, ensuring that the system's data is always synchronized with the file storage.
 
-Buksan ang program at awtomatikong maglo-load ng impormasyon ng mga empleyado mula sa employees.csv.
-Logging In
+Example Usage
+java
+Copy code
+// Example usage of EmployeeDataHandler
 
-Ilagay ang iyong username at password. Kapag tama, makakapasok ka sa sistema. Kung hindi, magpo-promt ito para sa kulang na impormasyon.
-Logging Out
+// Create an instance of EmployeeDataHandler
+EmployeeDataHandler dataHandler = new EmployeeDataHandler();
 
-Para mag-log out, pumindot sa Profile at piliin ang "Logout" sa menu.
-Using Text Fields
-
-Pumindot sa loob ng text box para mag-focus dito. Maglalabas ang placeholder text kapag walang laman ang field, na nagtuturo kung ano ang dapat ilagay.
-These updates aim to improve the program's functionality and user experience. Enjoy using it!
+// Check login credentials
+if (dataHandler.checkCredentials(username, password)) {
+    // Proceed with operations (update, delete, add)
+    
+    // Example update operation
+    Employee employeeToUpdate = new Employee(...); // Create or retrieve the employee to update
+    dataHandler.updateEmployee(employeeToUpdate);
+    
+    // Example delete operation
+    int employeeIdToDelete = ...; // Provide the ID of the employee to delete
+    dataHandler.deleteEmployee(employeeIdToDelete);
+    
+    // Example add operation
+    Employee newEmployee = new Employee(...); // Create a new employee object
+    dataHandler.addEmployee(newEmployee);
+} else {
+    // Handle invalid login credentials
+}
+This class facilitates secure access to employee data and ensures that updates to employee records are persisted in the employees.csv file for reliable data management.
